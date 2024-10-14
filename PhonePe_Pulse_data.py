@@ -1,16 +1,6 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[5]:
-
-
 # PhonePe Pulse data is available in Github repository.
 # Now we need to access it in Python. So we use a git clone to obtain the data and access in Python.
 #!git clone https://github.com/PhonePe/pulse.git
-
-
-# In[34]:
-
 
 # Access the state folders in PhonePe Pulse data
 import os
@@ -21,10 +11,6 @@ import os
 # List of all the states in the chosen directory
 #Agg_state_list
 
-
-# In[31]:
-
-
 # Convert the name of the states to match the state name to the state while representing the data in geo-visualization
 def change_state_spell(state_lis):
     state_lis = state_lis.str.replace('andaman-&-nicobar-islands','Andaman & Nicobar')
@@ -33,13 +19,6 @@ def change_state_spell(state_lis):
     state_lis = state_lis.str.replace('Dadra & Nagar Haveli & Daman & Diu','Dadra and Nagar Haveli and Daman and Diu')
     return state_lis
     
-    
-    
-
-
-# In[105]:
-
-
 # To create an aggregate transaction data in a data format and convert it into a data frame.
 # The data for each state for each year is stored in json format
 import json
@@ -77,17 +56,8 @@ for i in Agg_state_list:
                 Agg_trans["Transaction_amount"].append(Amount)
 df_agg_trans = pd.DataFrame(Agg_trans)
 df_agg_trans.State=change_state_spell(df_agg_trans.State)
-#df_agg_trans.info()
-
-
-# In[106]:
-
 
 df_agg_trans.to_csv('Aggregated_Transaction.csv',index=False)
-
-
-# In[107]:
-
 
 # Aggregated User table
 path = "Phone_Pe/data/aggregated/user/country/india/state/"
@@ -124,23 +94,8 @@ for i in Agg_state_list:
                     Agg_user["User_count_percentage"].append(Perc)
 df_agg_user = pd.DataFrame(Agg_user)
 df_agg_user.State=change_state_spell(df_agg_user.State)
-#df_agg_user.info()
-
-
-# In[108]:
-
 
 df_agg_user.to_csv('Aggregated_User.csv',index=False)
-
-
-# In[65]:
-
-
-Agg_state_list
-
-
-# In[109]:
-
 
 # Map Transaction
 path = "Phone_Pe/data/map/transaction/hover/country/india/state/"
@@ -177,17 +132,8 @@ for i in Map_state_list:
 
 df_map_trans = pd.DataFrame(Map_trans)
 df_map_trans.State=change_state_spell(df_map_trans.State)
-#df_map_trans.info()
-
-
-# In[110]:
-
 
 df_map_trans.to_csv('Map_transaction.csv',index=False)
-
-
-# In[111]:
-
 
 # Map Users
 path ="Phone_Pe/data/map/user/hover/country/india/state/"
@@ -223,17 +169,8 @@ for i in Map_state_list:
                 Map_user["App_opens"].append(App_ops)
 df_map_user = pd.DataFrame(Map_user)
 df_map_user.State = change_state_spell(df_map_user.State)
-#df_map_user.info()
-
-
-# In[112]:
-
 
 df_map_user.to_csv('Map_user.csv',index=False)
-
-
-# In[113]:
-
 
 # Top Transaction
 path = "Phone_Pe/data/top/transaction/country/india/state/"
@@ -286,35 +223,16 @@ for i in Top_state_list:
                 Top_trans_pin["Total_transaction_top_pin"].append(Trans_amt)
 
 
-# In[114]:
-
-
 df_top_trans_dis = pd.DataFrame(Top_trans_dis)
 df_top_trans_dis.State = change_state_spell(df_top_trans_dis.State)
-#df_top_trans_dis.info()
-
-
-# In[115]:
-
 
 df_top_trans_dis.to_csv('Top_transaction_dis.csv',index=False)
 
-
-# In[116]:
-
-
 df_top_trans_pin = pd.DataFrame(Top_trans_pin)
 df_top_trans_pin.State=change_state_spell(df_top_trans_pin.State)
-#df_top_trans_pin.info()
-
-
-# In[117]:
 
 
 df_top_trans_pin.to_csv('Top_transaction_pin.csv',index=False)
-
-
-# In[119]:
 
 
 # Top user
@@ -361,31 +279,14 @@ for i in Top_state_list:
                 Top_user_pin["PINCODE"].append(int(pc))
                 Top_user_pin["Total_registered_users_pin"].append(reg_users)
 
-
-# In[120]:
-
-
+                
 df_top_user_dis = pd.DataFrame(Top_user_dis)
 df_top_user_dis.State = change_state_spell(df_top_user_dis.State)
-#df_top_user_dis.info()
-
-
-# In[121]:
-
 
 df_top_user_dis.to_csv('Top_user_dis.csv',index=False)
 
-
-# In[123]:
-
-
 df_top_user_pin = pd.DataFrame(Top_user_pin)
 df_top_user_pin.State = change_state_spell(df_top_user_pin.State)
-#df_top_user_pin.info()
-
-
-# In[124]:
-
 
 df_top_user_pin.to_csv('Top_user_pin.csv',index=False)
 
